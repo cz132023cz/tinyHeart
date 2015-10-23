@@ -11,6 +11,8 @@ var deltaTime;//两帧间隔的时间差
 
 var bgPic = new Image();
 
+var ane;
+var fruit;
 
 document.body.onload = game;
 
@@ -18,7 +20,7 @@ function game(){
     init();
     lastTime = Date.now();
     deltaTime = 0;
-    gameloop();
+    gameLoop();
 }
 
 function init(){
@@ -32,12 +34,21 @@ function init(){
     bgPic.src = './src/background.jpg';
     canvasWidth = can1.width;
     canvasHeight = can1.height;
+
+    ane = new aneObj();
+    ane.init();
+
+    fruit = new fruitObj();
+    fruit.init();
 }
 
-function gameloop(){
-    requestAnimFrame(gameloop);//setInterval,setTimeout,fps,根据浏览器性能来决定帧数
+function gameLoop(){
+    requestAnimFrame(gameLoop);//setInterval,setTimeout,fps,根据浏览器性能来决定帧数
     var now = Date.now();
     deltaTime = now - lastTime;
     lastTime = now;
     drawBackground();
+
+    ane.draw();
+    fruit.draw();
 }
