@@ -16,6 +16,9 @@ var fruit;
 
 var mom;
 
+var mx;
+var my;
+
 document.body.onload = game;
 
 function game(){
@@ -33,6 +36,8 @@ function init(){
     can2 = document.getElementById('canvas2');//后面
     ctx2 = can1.getContext('2d');
 
+    can1.addEventListener('mousemove',onMouseMove);
+
     bgPic.src = './src/background.jpg';
     canvasWidth = can1.width;
     canvasHeight = can1.height;
@@ -45,6 +50,9 @@ function init(){
 
     mom = new momObj();
     mom.init();
+
+    mx = canvasWidth * 0.5;
+    my = canvasHeight * 0.5;
 }
 
 function gameLoop(){
@@ -54,7 +62,7 @@ function gameLoop(){
     lastTime = now;
     ctx1.clearRect(0,0,canvasWidth,canvasHeight);
     ctx2.clearRect(0,0,canvasWidth,canvasHeight);
-
+    momFruitsCollision();
     drawBackground();
 
     ane.draw();
@@ -63,4 +71,12 @@ function gameLoop(){
 
 
     mom.draw();
+}
+
+function onMouseMove(e){
+    if(e.offsetX || e.layerX){
+        mx = e.offsetX == undefined ? e.layerX : e.offsetX;
+        my = e.offsetY == undefined ? e.layerY : e.offsetY;
+
+    }
 }
