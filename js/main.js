@@ -15,6 +15,7 @@ var ane;
 var fruit;
 
 var mom;
+var baby;
 
 var mx;
 var my;
@@ -51,6 +52,9 @@ function init(){
     mom = new momObj();
     mom.init();
 
+    baby = new babyObj();
+    baby.init();
+
     mx = canvasWidth * 0.5;
     my = canvasHeight * 0.5;
 }
@@ -60,6 +64,11 @@ function gameLoop(){
     var now = Date.now();
     deltaTime = now - lastTime;
     lastTime = now;
+
+    if(deltaTime > 40){
+        deltaTime = 40;
+    }
+
     ctx1.clearRect(0,0,canvasWidth,canvasHeight);
     ctx2.clearRect(0,0,canvasWidth,canvasHeight);
     momFruitsCollision();
@@ -71,6 +80,7 @@ function gameLoop(){
 
 
     mom.draw();
+    baby.draw();
 }
 
 function onMouseMove(e){
