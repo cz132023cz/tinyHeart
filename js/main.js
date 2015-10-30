@@ -20,6 +20,12 @@ var baby;
 var mx;
 var my;
 
+var data;
+
+var wave;
+var halo;
+
+
 document.body.onload = game;
 
 function game(){
@@ -57,6 +63,17 @@ function init(){
 
     mx = canvasWidth * 0.5;
     my = canvasHeight * 0.5;
+
+    data = new dataObj();
+
+    ctx1.font = '30px Verdana';
+    ctx1.textAlign = 'center';
+
+    wave = new waveObj();
+    wave.init();
+
+    halo = new haloObj();
+    halo.init();
 }
 
 function gameLoop(){
@@ -69,9 +86,12 @@ function gameLoop(){
         deltaTime = 40;
     }
 
-    ctx1.clearRect(0,0,canvasWidth,canvasHeight);
-    ctx2.clearRect(0,0,canvasWidth,canvasHeight);
+    //ctx1.clearRect(0,0,canvasWidth,canvasHeight);
+    //ctx2.clearRect(0,0,canvasWidth,canvasHeight);
+    //大鱼吃果实
     momFruitsCollision();
+    //大鱼喂小鱼
+    momBabyCollision();
     drawBackground();
 
     ane.draw();
@@ -81,10 +101,14 @@ function gameLoop(){
 
     mom.draw();
     baby.draw();
+
+    data.draw();
+    wave.draw();
+    halo.draw();
 }
 
 function onMouseMove(e){
-    if(e.offsetX || e.layerX){
+    if((e.offsetX || e.layerX) && !data.gameOver){
         mx = e.offsetX == undefined ? e.layerX : e.offsetX;
         my = e.offsetY == undefined ? e.layerY : e.offsetY;
 
