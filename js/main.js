@@ -25,6 +25,7 @@ var data;
 var wave;
 var halo;
 
+var dust;
 
 document.body.onload = game;
 
@@ -74,6 +75,9 @@ function init(){
 
     halo = new haloObj();
     halo.init();
+
+    dust = new dustObj();
+    dust.init();
 }
 
 function gameLoop(){
@@ -105,6 +109,7 @@ function gameLoop(){
     data.draw();
     wave.draw();
     halo.draw();
+    dust.draw();
 }
 
 function onMouseMove(e){
