@@ -10,6 +10,7 @@ var aneObj = function(){
 };
 
 aneObj.prototype.num = 50;
+//初始化
 aneObj.prototype.init = function(){
     for(var i= 0,len=this.num;i<len;i++){
         this.rootx[i] = i * 16 + Math.random() * 20;
@@ -18,6 +19,7 @@ aneObj.prototype.init = function(){
         this.amp[i] = Math.random() * 50 +50;
     }
 };
+//画海葵
 aneObj.prototype.draw = function(){
     this.alpha += deltaTime * 0.001;
     var l = Math.sin(this.alpha);
